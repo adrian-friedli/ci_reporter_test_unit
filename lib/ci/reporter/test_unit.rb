@@ -30,6 +30,7 @@ module CI
     class TestUnitError
       def initialize(fault) @fault = fault end
       def failure?() false end
+      def skipped?() false end
       def error?() true end
       def name() @fault.exception.class.name end
       def message() @fault.exception.message end
@@ -40,6 +41,7 @@ module CI
     class TestUnitFailure
       def initialize(fault) @fault = fault end
       def failure?() true end
+      def skipped?() false end
       def error?() false end
       def name() Test::Unit::AssertionFailedError.name end
       def message() @fault.message end
@@ -50,6 +52,7 @@ module CI
     class TestUnitSkipped
       def initialize(fault) @fault = fault end
       def failure?() false end
+      def skipped?() true end
       def error?() false end
       def name() @fault.class.name end
       def message() @fault.message end
@@ -60,6 +63,7 @@ module CI
     class TestUnitNotification
       def initialize(fault) @fault = fault end
       def failure?() false end
+      def skipped?() false end
       def error?() false end
       def name() @fault.class.name end
       def message() @fault.message end
